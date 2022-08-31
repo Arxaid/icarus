@@ -1,0 +1,7 @@
+# This file is part of the Icarus project.
+#
+# Copyright (c) 2022 Vladislav Sosedov.
+
+.vs/
+bin/
+obj/
