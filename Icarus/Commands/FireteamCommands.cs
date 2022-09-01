@@ -17,6 +17,7 @@ namespace Icarus.Commands
     public class SlashFireteamCommands : ApplicationCommandModule
     {
         public static DiscordEmbedBuilder fireteamEmbed;
+        public static DiscordMessageBuilder fireteamMessageBuilder;
 
         [SlashCommand("create", "Creates a new fireteam.")]
         public async Task Create(InteractionContext ctx,
@@ -30,9 +31,24 @@ namespace Icarus.Commands
                 Title = searchActivity + "\n" + ActivityContent.PendingActivityTime(searchTime),
                 Description = searchComment,
                 Color = DiscordColor.Black
-            }.WithThumbnail(ActivityContent.PendingActivityImage(searchActivity));
+            }
+            .WithThumbnail(ActivityContent.PendingActivityImage(searchActivity));
 
-            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(fireteamEmbed)).ConfigureAwait(false);
+            fireteamMessageBuilder = new DiscordMessageBuilder();
+            fireteamMessageBuilder.AddEmbed(fireteamEmbed);
+            fireteamMessageBuilder.AddComponents(new DiscordComponent[] 
+            { 
+                new DiscordButtonComponent(ButtonStyle.Primary, "join", "Join", false),
+                new DiscordButtonComponent(ButtonStyle.Primary, "maybe", "Maybe Join", false),
+                new DiscordButtonComponent(ButtonStyle.Danger, "delete", "Delete", false)
+            });
+
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
+                                          .WithContent(ctx.Member.Nickname + "'s new fireteam.")).ConfigureAwait(false);
+
+            await ctx.DeleteResponseAsync().ConfigureAwait(false);
+
+            await ctx.Channel.SendMessageAsync(fireteamMessageBuilder).ConfigureAwait(false);
         }
     }
 }
