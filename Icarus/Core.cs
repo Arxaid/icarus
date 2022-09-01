@@ -70,6 +70,7 @@ namespace Icarus.Core
 
             SlashCommands = this.Client.UseSlashCommands();
             SlashCommands.RegisterCommands<SlashBaseCommands>();
+            SlashCommands.RegisterCommands<SlashFireteamCommands>();
 
             this.Client.UseInteractivity(interactivityConfig);
             this.Handlers = new Handlers(this.Client);
