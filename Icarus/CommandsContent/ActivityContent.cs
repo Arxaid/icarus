@@ -33,20 +33,24 @@ namespace Icarus.Commands
             string modifiedTimeString = string.Empty;
             modifiedTimeString += parsedTimeString[0] + " ";
 
-            if (parsedTimeString[1] == "01") { modifiedTimeString += "January"; };
-            if (parsedTimeString[1] == "02") { modifiedTimeString += "February"; };
-            if (parsedTimeString[1] == "03") { modifiedTimeString += "March"; };
-            if (parsedTimeString[1] == "04") { modifiedTimeString += "Arpil"; };
-            if (parsedTimeString[1] == "05") { modifiedTimeString += "May"; };
-            if (parsedTimeString[1] == "06") { modifiedTimeString += "June"; };
-            if (parsedTimeString[1] == "07") { modifiedTimeString += "July"; };
-            if (parsedTimeString[1] == "08") { modifiedTimeString += "August"; };
-            if (parsedTimeString[1] == "09") { modifiedTimeString += "September"; };
-            if (parsedTimeString[1] == "10") { modifiedTimeString += "October"; };
-            if (parsedTimeString[1] == "11") { modifiedTimeString += "November"; };
-            if (parsedTimeString[1] == "12") { modifiedTimeString += "December"; };
+            switch (parsedTimeString[1])
+            {
+                case "01": modifiedTimeString += "January, ";   break;
+                case "02": modifiedTimeString += "February, ";  break;
+                case "03": modifiedTimeString += "March, ";     break;
+                case "04": modifiedTimeString += "Arpil, ";     break;
+                case "05": modifiedTimeString += "May, ";       break;
+                case "06": modifiedTimeString += "June, ";      break;
+                case "07": modifiedTimeString += "July, ";      break;
+                case "08": modifiedTimeString += "August, ";    break;
+                case "09": modifiedTimeString += "September, "; break;
+                case "10": modifiedTimeString += "October, ";   break;
+                case "11": modifiedTimeString += "November, ";  break;
+                case "12": modifiedTimeString += "December, ";  break;
+                default: modifiedTimeString = string.Empty;     break;
+            }
 
-            modifiedTimeString += ", " + parsedTimeString[2];
+            modifiedTimeString += parsedTimeString[2];
             return modifiedTimeString;
         }
     }
