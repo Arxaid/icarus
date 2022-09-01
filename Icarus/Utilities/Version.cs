@@ -6,6 +6,6 @@ namespace Icarus.Utilities
 {
     public class Version
     {
-        public static string CurrentVersion = "0.1.0";
+        public static string CurrentVersion = "v0.1.0";
     }
 }

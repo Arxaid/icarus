@@ -23,12 +23,12 @@ namespace Icarus.Utilities
 
         internal Task OnClientReady(DiscordClient discordClient, ReadyEventArgs eventArgs)
         {
-            Client.UpdateStatusAsync(new DiscordActivity("v" + Version.CurrentVersion, ActivityType.Watching), UserStatus.DoNotDisturb);
+            Client.UpdateStatusAsync(new DiscordActivity(Version.CurrentVersion, ActivityType.Watching), UserStatus.DoNotDisturb);
             return Task.CompletedTask;
         }
 
         #endregion
-        #region LogHandler
+        #region GuildHandler
 
         internal async Task OnFindingTheGuild(DiscordClient discordClient, GuildCreateEventArgs eventArgs)
         {
