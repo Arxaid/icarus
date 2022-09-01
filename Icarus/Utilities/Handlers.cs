@@ -32,7 +32,7 @@ namespace Icarus.Utilities
 
         internal async Task OnFindingTheGuild(DiscordClient discordClient, GuildCreateEventArgs eventArgs)
         {
-            LogChannel = eventArgs.Guild.GetChannel(1014543689764315197);
+            LogChannel = eventArgs.Guild.GetChannel(1014838285807394836);
 
             var messages = LogChannel.GetMessagesAsync();
             if (messages.Result.Any())
