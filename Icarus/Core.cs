@@ -65,6 +65,7 @@ namespace Icarus.Core
             this.Client = new DiscordClient(clientConfig);
 
             PrefixCommands = this.Client.UseCommandsNext(commandsConfig);
+            PrefixCommands.SetHelpFormatter<CustomHelpFormatter>();
             PrefixCommands.RegisterCommands<PrefixBaseCommands>();
 
             SlashCommands = this.Client.UseSlashCommands();
