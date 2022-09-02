@@ -13,5 +13,17 @@ namespace Icarus.Utilities
 
         [JsonProperty("botPrefix")]
         public string Prefix { get; private set; }
+
+        [JsonProperty("dbHost")]
+        public string Host { get; private set; }
+
+        [JsonProperty("dbName")]
+        public string Name { get; private set; }
+
+        [JsonProperty("dbUser")]
+        public string User { get; private set; }
+
+        [JsonProperty("dbPassword")]
+        public string Password { get; private set; }
     }
 }

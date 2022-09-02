@@ -15,8 +15,9 @@ using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 
-using Icarus.Utilities;
 using Icarus.Commands;
+using Icarus.Utilities;
+using Icarus.Database;
 
 namespace Icarus.Core
 {
@@ -60,6 +61,8 @@ namespace Icarus.Core
                 Timeout = TimeSpan.FromDays(10)
             };
 
+            Connection.SetConnectionString(configJson.Host, 3306, configJson.Name, configJson.User, configJson.Password);
+
             #endregion
 
             this.Client = new DiscordClient(clientConfig);
@@ -76,6 +79,7 @@ namespace Icarus.Core
             this.Handlers = new Handlers(this.Client);
             this.Client.Ready += this.Handlers.OnClientReady;
             this.Client.GuildAvailable += this.Handlers.OnFindingTheGuild;
+            this.Client.ComponentInteractionCreated += this.Handlers.OnButtonPressed;
 
             await this.Client.ConnectAsync();
             await Task.Delay(-1);
