@@ -62,6 +62,7 @@ namespace Icarus.Core
             };
 
             Connection.SetConnectionString(configJson.Host, 3306, configJson.Name, configJson.User, configJson.Password);
+            Tables.SetupTables();
 
             #endregion
 
