@@ -10,6 +10,8 @@ using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 
+using Icarus.Commands;
+
 namespace Icarus.Utilities
 {
     internal class Handlers
@@ -48,6 +50,14 @@ namespace Icarus.Utilities
             };
 
             await LogChannel.SendMessageAsync(embed: startupEmbed).ConfigureAwait(false);
+        }
+
+        #endregion
+        #region ButtonPressHandler
+
+        public async Task OnButtonPressed(DiscordClient discordClient, ComponentInteractionCreateEventArgs eventArgs)
+        {
+            await eventArgs.Interaction.CreateResponseAsync(InteractionResponseType.DeferredMessageUpdate);
         }
 
         #endregion
