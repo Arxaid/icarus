@@ -17,9 +17,9 @@ namespace Icarus.Database
                     "id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT," +
                     "fireteam_id BIGINT UNSIGNED NOT NULL," +
                     "fireteam_guild BIGINT UNSIGNED NOT NULL," +
-                    "fireteam_time DATETIME NOT NULL," +
-                    "fireteam_leader BIGINT UNSIGNED NOT NULL," +
-                    "fireteam_member BIGINT UNSIGNED)",
+                    "fireteam_leader BIGINT UNSIGNED," +
+                    "fireteam_active_member BIGINT UNSIGNED," +
+                    "fireteam_maybe_member BIGINT UNSIGNED)",
                     connection);
 
                 connection.Open();
