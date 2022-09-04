@@ -37,11 +37,10 @@ namespace Icarus.Commands
             DiscordEmbedBuilder fireteamEmbed = new DiscordEmbedBuilder
             {
                 Title = searchActivity + "\n" + ActivityContent.PendingActivityTime(searchTime),
-                Description = searchComment,
+                Description = searchComment + "\n\n**Fireteam leader: **\n" + ctx.User.Mention + " - " + ctx.User.Username,
                 Color = DiscordColor.Black
             }
             .WithThumbnail(ActivityContent.PendingActivityImage(searchActivity));
-            fireteamEmbed.AddField("Fireteam leader: ", ctx.User.Mention + " - " + ctx.User.Username);
 
             DiscordMessage fireteamMessage = await ctx.Channel.SendMessageAsync(embed: fireteamEmbed).ConfigureAwait(false);
 
@@ -49,16 +48,16 @@ namespace Icarus.Commands
             {
                 msg.AddComponents(new DiscordComponent[]
                 {
-                    new DiscordButtonComponent(ButtonStyle.Primary, "join" + fireteamMessage.Id, "Join", false),
-                    new DiscordButtonComponent(ButtonStyle.Primary, "maybe" + fireteamMessage.Id, "Maybe Join", false),
-                    new DiscordButtonComponent(ButtonStyle.Danger, "delete" + fireteamMessage.Id, "Delete", false)
+                    new DiscordButtonComponent(ButtonStyle.Primary, "join", "Join", false),
+                    new DiscordButtonComponent(ButtonStyle.Primary, "maybe", "Maybe Join", false),
+                    new DiscordButtonComponent(ButtonStyle.Danger, "delete", "Delete", false)
                 });
                 msg.Embed = fireteamEmbed.Build();
             }).ConfigureAwait(false);
 
             if (!Fireteam.FireteamCreate(fireteamMessage.Id, ctx.Guild.Id, ctx.User.Id))
             {
-                await ctx.Channel.SendMessageAsync("db err").ConfigureAwait(false);
+                await ctx.Channel.SendMessageAsync(embed: ErrorEmbeds.databaseError_FireteamCreation).ConfigureAwait(false);
             }
         }
     }
